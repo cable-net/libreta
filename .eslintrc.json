@@ -3,7 +3,8 @@
         "browser": true,
         "commonjs": true,
         "es2021": true,
-        "node": true
+        "node": true,
+        "mocha": true
     },
     "extends": [
         "standard"
@@ -12,5 +13,11 @@
         "ecmaVersion": "latest"
     },
     "rules": {
+        "no-unused-vars": [
+            "error",
+            {
+              "varsIgnorePattern": "should|expect"
+            }
+        ]
     }
 }
