@@ -1,13 +1,12 @@
-const express = require('express');
-const app = express();
+const express = require('express')
+const app = express()
+require('dotenv').config()
 
-require('dotenv').config();
+const healthRoutes = require('./routes/health')
 
-const healthRoutes = require('./routes/health');
+app.use('/api/health/', healthRoutes)
 
-app.use('/api/health/', healthRoutes);
-
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
-    console.log(`servidor andando en: ${PORT}`);
-});
+  console.warn(`server running on: ${PORT}`)
+})
