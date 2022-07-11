@@ -10,3 +10,5 @@ const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.warn(`server running on: ${PORT}`)
 })
+
+module.exports = app
