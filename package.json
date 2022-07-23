@@ -13,12 +13,20 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "@hapi/joi-date": "^2.0.1",
+    "@joi/date": "^2.1.0",
+    "bcrypt": "^5.0.1",
     "chai": "^4.3.6",
     "chai-http": "^4.3.0",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "joi": "^17.6.0",
     "mocha": "^10.0.0",
-    "mocha-junit-reporter": "^2.0.2"
+    "mocha-junit-reporter": "^2.0.2",
+    "mongoose": "^6.4.6",
+    "mongose": "^0.0.2-security",
+    "supertest": "^6.2.4"
   },
   "devDependencies": {
     "eslint": "^8.19.0",
