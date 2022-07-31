@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 const app = require('../app')
 const Cliente = require('../models/cliente')
 
-describe('Pruebas para la autenticacion en la plataforma', () => {
+describe('/ cliente POST', () => {
   before(async () => {
     // before each test delete all users table data
     await Cliente.deleteMany({})
@@ -22,14 +22,14 @@ describe('Pruebas para la autenticacion en la plataforma', () => {
         nombre: 'Salvador',
         paterno: 'Hernandez',
         materno: 'Olguin',
-        fechana: '2022-01-01',
+        fechaNacimiento: '2022-01-01',
         genero: 'M',
         email: 'a45srgh@gmail.com',
-        teluno: '7387252435',
-        teldos: '7712794678',
+        telefonoUno: '7387252435',
+        telefonoDos: '7712794678',
         calle: 'Francisco J. Mujica',
-        numeroint: '0',
-        numeroext: '24',
+        numeroInt: '0',
+        numeroExt: '24',
         referencia: 'Detras de la Secundaria David Noble, casa de color blanco, con negocio de papeleria',
         estado: 'Hidalgo',
         municipio: 'Mixquiahuala',
@@ -40,7 +40,7 @@ describe('Pruebas para la autenticacion en la plataforma', () => {
       }
       const res = await request(app).post('/api/cliente').send(cliente)
       expect(res.status).to.equal(201)
-      expect(res.body).to.have.include.keys('_id', 'date')
+      expect(res.body).to.have.include.keys('_id')
     })
   })
 })

@@ -16,10 +16,12 @@ mongoose.connect(uri, options).then(
 )
 
 const healthRoutes = require('./routes/health')
-const authRoutes = require('./routes/cliente')
+const clienteRoutes = require('./routes/cliente')
+const verifyToken = require('./routes/validate-token')
 
+app.use('/api/cliente', verifyToken, clienteRoutes)
 app.use('/api/health/', healthRoutes)
-app.use('/api/cliente', authRoutes)
+app.use('/api/cliente', clienteRoutes)
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {

@@ -1,4 +1,3 @@
-const { string } = require('@hapi/joi')
 const mongoose = require('mongoose')
 
 const clienteSchema = mongoose.Schema({
@@ -20,9 +19,9 @@ const clienteSchema = mongoose.Schema({
     min: 6,
     max: 255
   },
-  fechana: {
+  fechaNacimiento: {
     type: Date,
-    required: true,
+    required: true
   },
   genero: {
     type: String,
@@ -35,13 +34,13 @@ const clienteSchema = mongoose.Schema({
     min: 6,
     max: 255
   },
-  teluno: {
+  telefonoUno: {
     type: String,
     required: true,
     min: 12,
     max: 12
   },
-  teldos: {
+  telefonoDos: {
     type: String,
     required: true,
     min: 12,
@@ -53,13 +52,13 @@ const clienteSchema = mongoose.Schema({
     min: 6,
     max: 255
   },
-  numeroint: {
+  numeroInt: {
     type: String,
     required: true,
     min: 1,
     max: 10
   },
-  numeroext: {
+  numerExt: {
     type: String,
     required: true,
     min: 1,
