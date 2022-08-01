@@ -37,13 +37,13 @@ const clienteSchema = mongoose.Schema({
   telefonoUno: {
     type: String,
     required: true,
-    min: 12,
+    min: 6,
     max: 12
   },
   telefonoDos: {
     type: String,
     required: true,
-    min: 12,
+    min: 6,
     max: 12
   },
   calle: {
@@ -58,7 +58,7 @@ const clienteSchema = mongoose.Schema({
     min: 1,
     max: 10
   },
-  numerExt: {
+  numeroExt: {
     type: String,
     required: true,
     min: 1,
