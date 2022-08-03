@@ -4,19 +4,19 @@ const clienteSchema = mongoose.Schema({
   nombre: {
     type: String,
     required: true,
-    min: 6,
+    min: 1,
     max: 255
   },
   paterno: {
     type: String,
     required: true,
-    min: 6,
+    min: 3,
     max: 255
   },
   materno: {
     type: String,
     required: true,
-    min: 6,
+    min: 3,
     max: 255
   },
   fechaNacimiento: {
@@ -28,28 +28,34 @@ const clienteSchema = mongoose.Schema({
     required: true,
     enum: ['M', 'F']
   },
+  curp: {
+    type: String,
+    required: true,
+    min: 18,
+    max: 18
+  },
   email: {
     type: String,
     required: true,
-    min: 6,
+    min: 2,
     max: 255
   },
   telefonoUno: {
     type: String,
     required: true,
-    min: 6,
-    max: 12
+    min: 10,
+    max: 10
   },
   telefonoDos: {
     type: String,
     required: true,
-    min: 6,
-    max: 12
+    min: 10,
+    max: 10
   },
   calle: {
     type: String,
     required: true,
-    min: 6,
+    min: 4,
     max: 255
   },
   numeroInt: {
