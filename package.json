@@ -7,6 +7,7 @@
     "dev": "nodemon app",
     "start": "node app",
     "lint": "npx eslint .",
+    "unit": "npx mocha 'unit/**/*.js' --recursive --timeout 60000 --exit",
     "integration": "npx mocha 'integration/**/*.js' --recursive --timeout 60000 --exit"
   },
   "keywords": [],
@@ -27,6 +28,8 @@
     "mocha-junit-reporter": "^2.0.2",
     "mongoose": "^6.4.6",
     "mongose": "^0.0.2-security",
+    "sinon": "^14.0.0",
+    "superagent": "^8.0.0",
     "supertest": "^6.2.4"
   },
   "devDependencies": {
