@@ -8,8 +8,7 @@ router.get('/:id', async (req, res) => {
   const isIdExist = await Cliente.findOne({ _id: req.params.id })
   if (isIdExist) {
     return res.status(200).json(isIdExist)
-  }
-  else {
+  } else {
     return res.status(404).json(
       { error: 'Este id no se encuentra' }
     )
