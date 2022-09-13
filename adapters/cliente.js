@@ -1,6 +1,6 @@
 const Joi = require('@hapi/joi').extend(require('@joi/date'))
 
-const USER_TYPE_COLABORADOR = 'colaborador'
+const USER_TYPE_CLIENTE = 'cliente'
 const PASSWORD_DEFAULT = 'D3fault#'
 
 const clienteSchema = Joi.object({
@@ -55,12 +55,12 @@ module.exports.bodyToModel = function (body) {
   return [error, cliente]
 }
 
-module.exports.colaboradorToUsuario = function (colaborador) {
+module.exports.clienteToUsuario = function (cliente) {
   return {
-    email: colaborador.email,
+    email: cliente.email,
     password: PASSWORD_DEFAULT,
-    user_id: colaborador._id,
-    user_type: USER_TYPE_COLABORADOR,
-    role: colaborador.tipoColaborador
+    user_id: cliente._id,
+    user_type: USER_TYPE_CLIENTE,
+    role: cliente.tipoCliente
   }
 }

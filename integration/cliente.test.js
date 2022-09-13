@@ -217,5 +217,42 @@ describe('/ cliente POST', () => {
       expect(res.status).to.equal(400)
       expect(res.body.error).to.equal('Informacion almacenada parcialmente')
     })
+
+    it('deberia retornar un colaborador con su id', async () => {
+      const cliente = {
+        nombre: 'Eduardo',
+        paterno: 'Hernandez',
+        materno: 'Lopez',
+        fechaNacimiento: '2007-02-22 10:30:33',
+        genero: 'M',
+        curp: 'GAOS780616HHGRLL07',
+        email: 'get142@gmail.com',
+        telefonoUno: '7387252435',
+        telefonoDos: '7718777777',
+        calle: 'Francisco J. Mujica',
+        numeroInt: '0',
+        numeroExt: '24',
+        referencia: 'Detras de la Secundaria David Noble, casa de color blanco, con negocio de papeleria',
+        estado: 'Hidalgo',
+        municipio: 'Mixquiahuala',
+        colonia: 'Bondho',
+        cp: '42708',
+        paquete: 'Basico',
+        tvs: '2'
+      }
+      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZTVmZDEzODJlYWMwMmQ3NWI4ZGE3NCIsImlhdCI6MTY1OTIzOTcwMH0.AV5WVSIY63cRGMDcJEHFFHVuPiALwcJAJuSt3oS962o'
+      const response = await request(app).post('/api/cliente').set('auth-token', token).send(cliente)
+      const id = response.body._id
+      const res = await request(app).get('/api/cliente/' + id).set('auth-token', token)
+      expect(res.status).to.equal(200)
+      expect(res.body).to.have.include.keys('_id')
+    })
+
+    it('deberia retornar un error porque el id del cliente no se encuentra', async () => {
+      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZTVmZDEzODJlYWMwMmQ3NWI4ZGE3NCIsImlhdCI6MTY1OTIzOTcwMH0.AV5WVSIY63cRGMDcJEHFFHVuPiALwcJAJuSt3oS962o'
+      const res = await request(app).get('/api/cliente/6318260b5371d769eddfcc2b').set('auth-token', token)
+      expect(res.status).to.equal(404)
+      expect(res.body.error).to.equal('Este id no se encuentra')
+    })
   })
 })

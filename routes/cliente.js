@@ -4,6 +4,17 @@ const Cliente = require('../models/cliente')
 const adapter = require('../adapters/cliente')
 const httpOut = require('../http-out/auth')
 
+router.get('/:id', async (req, res) => {
+  const isIdExist = await Cliente.findOne({ _id: req.params.id })
+  if (isIdExist) {
+    return res.status(200).json(isIdExist)
+  } else {
+    return res.status(404).json(
+      { error: 'Este id no se encuentra' }
+    )
+  }
+})
+
 router.post('/', async (req, res) => {
   const [error, model] = adapter.bodyToModel(req.body)
   if (error) {
@@ -28,7 +39,7 @@ router.post('/', async (req, res) => {
   const cliente = new Cliente(model)
   try {
     const savedCliente = await cliente.save()
-    const usuario = adapter.colaboradorToUsuario(savedCliente)
+    const usuario = adapter.clienteToUsuario(savedCliente)
     const isUserRegistered = await httpOut.registerUsuario(usuario, req.header('auth-token'))
     if (!isUserRegistered) {
       return res.status(400).json(
