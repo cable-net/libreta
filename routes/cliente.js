@@ -8,12 +8,29 @@ router.get('/:id', async (req, res) => {
   const isIdExist = await Cliente.findOne({ _id: req.params.id })
   if (isIdExist) {
     return res.status(200).json(isIdExist)
-  }
-  else {
+  } else {
     return res.status(404).json(
       { error: 'Este id no se encuentra' }
     )
   }
+})
+
+router.get('/name/:nombre/like', async (req, res) => {
+  if (req.params.nombre.length < 3) {
+    return res.status(400).json({ error: 'Caracteres insuficientes para la busqueda' })
+  }
+  const clientesPorNombre = await Cliente.find({ nombre: { $regex: new RegExp(req.params.nombre, 'i') } })
+  const resultado = clientesPorNombre.map(cliente => (
+    {
+      id: cliente._id,
+      nombre: cliente.nombre,
+      segundoNombre: cliente.segundoNombre,
+      paterno: cliente.paterno,
+      materno: cliente.materno
+    }
+
+  ))
+  return res.status(200).json(resultado)
 })
 
 router.post('/', async (req, res) => {

@@ -218,7 +218,7 @@ describe('/ cliente POST', () => {
       expect(res.body.error).to.equal('Informacion almacenada parcialmente')
     })
 
-    it('deberia retornar un colaborador con su id', async () => {
+    it('deberia retornar un cliente con su id', async () => {
       const cliente = {
         nombre: 'Eduardo',
         paterno: 'Hernandez',
@@ -254,5 +254,40 @@ describe('/ cliente POST', () => {
       expect(res.status).to.equal(404)
       expect(res.body.error).to.equal('Este id no se encuentra')
     })
+  })
+
+  it('deberia retornar un cliente con su id y su nombre completo', async () => {
+    const cliente = {
+      nombre: 'Talia',
+      paterno: 'Hernandez',
+      materno: 'Lopez',
+      fechaNacimiento: '2007-02-22 10:30:33',
+      genero: 'F',
+      curp: 'TAOS780616HHGRLL07',
+      email: 'talia@gmail.com',
+      telefonoUno: '7387252435',
+      telefonoDos: '7718777777',
+      calle: 'Francisco J. Mujica',
+      numeroInt: '0',
+      numeroExt: '24',
+      referencia: 'Detras de la Secundaria David Noble, casa de color blanco, con negocio de papeleria',
+      estado: 'Hidalgo',
+      municipio: 'Mixquiahuala',
+      colonia: 'Bondho',
+      cp: '42708',
+      paquete: 'Basico',
+      tvs: '2'
+    }
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZTVmZDEzODJlYWMwMmQ3NWI4ZGE3NCIsImlhdCI6MTY1OTIzOTcwMH0.AV5WVSIY63cRGMDcJEHFFHVuPiALwcJAJuSt3oS962o'
+    await request(app).post('/api/cliente').set('auth-token', token).send(cliente)
+    const res = await request(app).get('/api/cliente/name/tal/like/').set('auth-token', token)
+    expect(res.status).to.equal(200)
+  })
+
+  it('deberia retornar un error por falta de caracteres para la busqueda ', async () => {
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZTVmZDEzODJlYWMwMmQ3NWI4ZGE3NCIsImlhdCI6MTY1OTIzOTcwMH0.AV5WVSIY63cRGMDcJEHFFHVuPiALwcJAJuSt3oS962o'
+    const res = await request(app).get('/api/cliente/name/ta/like/').set('auth-token', token)
+    expect(res.status).to.equal(400)
+    expect(res.body.error).to.equal('Caracteres insuficientes para la busqueda')
   })
 })
